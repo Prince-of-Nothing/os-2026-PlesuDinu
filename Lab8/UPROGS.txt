@@ -1,0 +1,4 @@
+Add these lines to the xv6 Makefile UPROGS list:
+
+        $U/_run\
+        $U/_pingpong\

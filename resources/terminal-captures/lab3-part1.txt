@@ -1,0 +1,26 @@
+== Part 1: command lookup ==
+cd is a shell builtin
+ls is /usr/bin/ls
+echo is a shell builtin
+/usr/bin/ls
+== PATH directories ==
+/home/user/.config/Code - OSS/User/globalStorage/github.copilot-chat/debugCommand
+/home/user/.config/Code - OSS/User/globalStorage/github.copilot-chat/copilotCli
+/home/user/.local/bin
+/home/user/.config/Code - OSS/User/globalStorage/github.copilot-chat/debugCommand
+/home/user/.config/Code - OSS/User/globalStorage/github.copilot-chat/copilotCli
+/usr/local/bin
+/usr/bin
+/bin
+/usr/local/sbin
+/opt/android-sdk/platform-tools
+/opt/cuda/bin
+/var/lib/flatpak/exports/bin
+/usr/bin/site_perl
+/usr/bin/vendor_perl
+/usr/bin/core_perl
+== missing command status ==
+resources/terminal-captures/capture-lab3.sh: line 16: nosuchprog: command not found
+exit code: 127
+== ls modification-time option ==
+         sort by time, newest first; see --time

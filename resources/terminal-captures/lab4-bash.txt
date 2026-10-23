@@ -1,0 +1,40 @@
+== Lab 4 Part 2: Bash commands ==
+$ echo hello > f; cat < f
+hello
+$ ls | grep READ
+README
+$ (echo a; echo b) | wc
+      2       2       4
+$ echo one; echo two
+one
+two
+$ echo bg &
+bg
+$ ls *
+f
+README
+$ echo $HOME
+/home/user
+$ echo "a b"
+a b
+$ mkdir d; cd d; ls ..
+d
+f
+README
+Up arrow, Tab, and Ctrl+R require an interactive terminal; see note in report.
+== Lab 4 Part 3: Linux args ==
+$ ./args *.c "x y"
+argc = 5
+argv[0] = [./args]
+argv[1] = [args.c]
+argv[2] = [args_linux.c]
+argv[3] = [sleep.c]
+argv[4] = [x y]
+$ ./args $HOME
+argc = 2
+argv[0] = [./args]
+argv[1] = [/home/user]
+$ ./args 'single quoted'
+argc = 2
+argv[0] = [./args]
+argv[1] = [single quoted]

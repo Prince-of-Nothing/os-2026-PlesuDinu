@@ -1,0 +1,34 @@
+== Part 4: oneliners.sh ==
+100
+/page0
+/page1
+/page2
+/page3
+different pages: 4
+    125 /page0
+    125 /page1
+    125 /page2
+    125 /page3
+     15 user5
+     15 user3
+user3: 72 requests, 15 failed
+10:10 user0
+10:15 user5
+10:20 user3
+     34 /usr/bin/nologin
+      1 /usr/bin/git-shell
+      1 /usr/bin/bash
+      1 /bin/fish
+ls: 227
+ls -l: 228
+== Part 5: report.sh ==
+500 requests, 100 failed
+user0: 14 failures
+user1: 14 failures
+user2: 14 failures
+user3: 15 failures
+user4: 14 failures
+user5: 15 failures
+user6: 14 failures
+no such file: /tmp/no-such-log
+missing-file exit: 1

@@ -1,0 +1,20 @@
+== Other report.sh behavior on generated log ==
+500 requests, 100 failed
+user0: 14 failures
+user1: 14 failures
+user2: 14 failures
+user3: 15 failures
+user4: 14 failures
+user5: 15 failures
+user6: 14 failures
+== Q4 lexical-sort check ==
+     15 user5
+     15 user3
+     14 user6
+     14 user4
+     14 user2
+     14 user1
+     14 user0
+== Q4 numeric maximum and ties ==
+     15 user5
+     15 user3

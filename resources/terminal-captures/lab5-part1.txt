@@ -1,0 +1,11 @@
+== File types ==
+lrwxrwxrwx  1 root root    7 Oct 12  2025 /bin -> usr/bin
+crw-rw-rw-  1 root root 1, 3 Oct 23 09:51 /dev/null
+drwxr-xr-x  1 root root 4244 Oct 23 09:54 /etc
+-rw-r--r--  1 root root 2177 Oct 23 09:51 /etc/passwd
+drwxrwxrwt 30 root root  740 Oct 23 11:44 /tmp
+/usr/bin/ls: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=d572a7b5009dbbcb275c2e516be58e706ae248a9, for GNU/Linux 4.4.0, stripped
+/etc/passwd: ASCII text
+/bin:        symbolic link to usr/bin
+45M	/var/log
+17G	/usr
