@@ -15,6 +15,7 @@ The xv6 tree is in `~/xv6-riscv`. I built and launched it with `make qemu`; QEMU
 
 1. Three programs shipped with xv6 are `echo`, `cat`, and `ls`.
 2. A pipe requires process creation so both commands can run, and inter-process communication through a kernel-managed pipe buffer and file descriptors.
+3. The xv6 shell supports basic command execution, pipes, and redirection, while Linux Bash adds richer scripting, expansion, history, completion, and job control.
 
 ## Part 3: Read the source
 
