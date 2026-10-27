@@ -1,0 +1,14 @@
+8
+MemTotal:       16055104 kB
+MemFree:         6483600 kB
+MemAvailable:    8546460 kB
+Name:	head
+Umask:	0022
+State:	R (running)
+Tgid:	53274
+Ngid:	0
+total 0
+lrwx------ 1 user user 64 Oct 23 11:44 0 -> /dev/pts/11
+l-wx------ 1 user user 64 Oct 23 11:44 1 -> /home/user/Documents/GitHub/os-2026-PlesuDinu/resources/terminal-captures/lab5-exercises.txt
+l-wx------ 1 user user 64 Oct 23 11:44 2 -> /home/user/Documents/GitHub/os-2026-PlesuDinu/resources/terminal-captures/lab5-exercises.txt
+lr-x------ 1 user user 64 Oct 23 11:44 3 -> /proc/53275/fd

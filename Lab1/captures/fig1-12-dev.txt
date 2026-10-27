@@ -1,0 +1,22 @@
+$ ls -l /dev | head
+$ mount | head
+total 0
+crw-r--r--  1 root     root     10, 235 Oct  5 11:25 autofs
+drwxr-xr-x  2 root     root        460 Oct  5 11:26 block
+drwxr-xr-x  2 root     root         80 Oct  5 11:17 bsg
+crw-------  1 root     root     10, 234 Oct  5 11:17 btrfs-control
+drwxr-xr-x  3 root     root         60 Oct  5 11:17 bus
+lrwxrwxrwx+ 1 root     root          3 Oct  5 11:17 cdrom -> sr0
+drwxr-xr-x  2 root     root       4020 Oct  5 11:25 char
+crw-------  1 root     tty       5,   1 Oct  5 11:25 console
+lrwxrwxrwx  1 root     root         11 Oct  5 11:16 core -> /proc/kcore
+tmpfs on /run type tmpfs (rw,nosuid,nodev,size=1519616k,nr_inodes=819200,mode=755,inode64)
+/dev/sda2 on / type ext4 (rw,relatime)
+devtmpfs on /dev type devtmpfs (rw,nosuid,size=2704484k,nr_inodes=676121,mode=755,inode64)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,inode64,usrquota)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=600,ptmxmode=000)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
+securityfs on /sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)
+cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot,memory_hugetlb_accounting)
+none on /sys/fs/pstore type pstore (rw,nosuid,nodev,noexec,relatime)
+bpf on /sys/fs/bpf type bpf (rw,nosuid,nodev,noexec,relatime,mode=700)

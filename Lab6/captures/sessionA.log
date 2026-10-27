@@ -1,0 +1,89 @@
+qemu-system-riscv64 -machine virt -bios none -kernel kernel/kernel -m 128M -smp 1 -nographic -global virtio-mmio.force-legacy=false -drive file=fs.img,if=none,format=raw,id=x0 -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0
+
+xv6 kernel is booting
+
+init: starting sh
+$ ls
+.              1 1 1024
+..             1 1 1024
+README         2 2 2441
+cat            2 3 37344
+echo           2 4 36160
+find           2 5 39392
+forktest       2 6 17912
+grep           2 7 40856
+init           2 8 36496
+kill           2 9 36064
+ln             2 10 35864
+ls             2 11 39400
+mkdir          2 12 36120
+mystat         2 13 36808
+rm             2 14 36104
+sh             2 15 59672
+stressfs       2 16 36936
+usertests      2 17 204328
+grind          2 18 51976
+wc             2 19 38336
+zombie         2 20 35400
+logstress      2 21 38112
+forphan        2 22 36864
+dorphan        2 23 36320
+sync           2 24 35496
+sleep          2 25 35824
+args           2 26 35824
+run            2 27 36424
+pingpong       2 28 37208
+console        3 29 0
+$ mkdir a
+$ ls a
+.              1 30 32
+..             1 1 1024
+$ mystat README . console
+README: file, inode 2, links 1, size 2441 bytes
+.: directory, inode 1, links 2, size 1024 bytes
+console: device, inode 29, links 1, size 0 bytes
+$ ln README r2
+$ mystat README r2
+README: file, inode 2, links 2, size 2441 bytes
+r2: file, inode 2, links 2, size 2441 bytes
+$ rm README
+$ mystat r2
+r2: file, inode 2, links 1, size 2441 bytes
+$ cat r2 | wc
+48 336 2441 
+$ mkdir averyveryverylongname
+$ ls
+.              1 1 1024
+..             1 1 1024
+averyveryveryl 1 31 32
+cat            2 3 37344
+echo           2 4 36160
+find           2 5 39392
+forktest       2 6 17912
+grep           2 7 40856
+init           2 8 36496
+kill           2 9 36064
+ln             2 10 35864
+ls             2 11 39400
+mkdir          2 12 36120
+mystat         2 13 36808
+rm             2 14 36104
+sh             2 15 59672
+stressfs       2 16 36936
+usertests      2 17 204328
+grind          2 18 51976
+wc             2 19 38336
+zombie         2 20 35400
+logstress      2 21 38112
+forphan        2 22 36864
+dorphan        2 23 36320
+sync           2 24 35496
+sleep          2 25 35824
+args           2 26 35824
+run            2 27 36424
+pingpong       2 28 37208
+console        3 29 0
+a              1 30 32
+r2             2 2 2441
+$ QEMU: Terminated
+

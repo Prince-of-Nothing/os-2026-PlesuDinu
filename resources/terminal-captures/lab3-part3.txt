@@ -1,0 +1,25 @@
+== Part 3: redirection, chaining, jobs ==
+$ ls /etc /nope > out.txt 2> err.txt
+$ wc -l out.txt; cat err.txt
+228 out.txt
+ls: cannot access '/nope': No such file or directory
+$ ls /etc /nope > all.txt 2>&1; tail -2 all.txt
+xl2tpd
+zsh
+$ ls /etc /nope 2>&1 > all2.txt
+ls: cannot access '/nope': No such file or directory
+errors in all2.txt: 0
+$ echo first > notes.md; echo second >> notes.md; cat notes.md
+first
+second
+$ wc -l < out.txt
+228
+$ false || echo failed; true && echo succeeded; echo done
+failed
+succeeded
+done
+$ sleep 100 &
+jobs
+kill %1
+jobs
+[1]+  Running                    sleep 100 &

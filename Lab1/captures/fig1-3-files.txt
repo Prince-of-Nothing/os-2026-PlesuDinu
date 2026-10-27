@@ -1,0 +1,10 @@
+$ cd ~/os-lab1
+$ mkdir demo && cd demo
+$ echo "hello operating systems" > note.txt
+$ cp note.txt copy.txt
+$ mv copy.txt renamed.txt
+$ ls -l
+$ rm renamed.txt
+total 0
+-rwxrwx--- 1 root vboxsf 24 Oct  5 07:31 note.txt
+-rwxrwx--- 1 root vboxsf 24 Oct  5 07:31 renamed.txt
