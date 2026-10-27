@@ -1,4 +1,0 @@
-$ ln README r2
-$ mystat README r2
-README: file, inode 2, links 2, size 2441 bytes
-r2: file, inode 2, links 2, size 2441 bytes

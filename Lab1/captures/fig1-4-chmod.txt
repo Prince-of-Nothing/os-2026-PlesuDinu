@@ -1,6 +1,0 @@
-$ ls -l note.txt
-$ chmod 600 note.txt
-$ ls -l note.txt
-$ chmod 644 note.txt
--rwxrwx--- 1 root vboxsf 24 Oct  5 07:31 note.txt
--rwxrwx--- 1 root vboxsf 24 Oct  5 07:31 note.txt

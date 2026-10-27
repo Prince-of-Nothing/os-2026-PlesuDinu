@@ -1,1 +1,29 @@
-/resources
+# ── Repo hygiene: only the 8 lab folders + their required files are visible ──
+# Whitelist approach: ignore everything at repo root, then re-include
+# the lab folders and this git metadata file.
+
+/*
+!/.gitignore
+!/Lab1
+!/Lab2
+!/Lab3
+!/Lab4
+!/Lab5
+!/Lab6
+!/Lab7
+!/Lab8
+
+# Tooling / scratch inside the labs — not required by the assignments:
+#   captures/  = raw terminal logs & figure screenshots used to build reports
+#   build_*.py = report compiler scripts
+#   notes.md   = working notes
+Lab*/captures/
+Lab*/build_*.py
+Lab*/notes.md
+
+# Junk that should never be committed anywhere:
+**/*~
+**/*.swp
+**/.DS_Store
+**/__pycache__/
+**/*.pyc

@@ -1,4 +1,0 @@
-$ sleep 20
-$ sleep
-usage: sleep <ticks>
-$ QEMU: Terminated

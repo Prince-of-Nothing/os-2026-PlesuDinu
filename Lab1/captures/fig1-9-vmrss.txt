@@ -1,6 +1,0 @@
-$ sleep 300 & PID=$!
-$ grep VmRSS /proc/$PID/status
-$ kill $PID
-[1] 13632
-VmRSS:	     204 kB
-[1]+  Terminated                 sleep 300
