@@ -1,0 +1,7 @@
+$ grep -n 'define BSIZE\|define NDIRECT\|define NINDIRECT\|define DIRSIZ' kernel/fs.h
+5:#define BSIZE   1024 // block size
+26:#define NDIRECT   12
+27:#define NINDIRECT (BSIZE / sizeof(uint))
+54:#define DIRSIZ 14
+$ grep -n nmeta mkfs.log  # make fs.img
+nmeta 47 (boot, super, log blocks 31, inode blocks 13, bitmap blocks 1) blocks 1953 total 2000
