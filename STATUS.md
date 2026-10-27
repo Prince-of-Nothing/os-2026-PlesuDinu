@@ -53,12 +53,19 @@ Verification performed:
    dated when the work was actually done. Older commits were not rewritten
    and no commit dates were set backwards — the instructor flagged rewritten
    history with backdated dates as a problem, so the plan is to never do it.
+7. Table of contents in all 8 reports converted from manually typed text to
+   a real Word TOC field (TOC \o "1-2" \h \z \u) with bookmarks on every
+   heading and w:updateFields, so Word/LibreOffice rebuild the indexation
+   with real page numbers and hyperlinks on open (or via F9 / Update Table).
+   The scripts used are fix_toc.py and fix_toc_lab5.py in the repo root.
 
 ## What still needs to be done
 
 - Push Temp-2 to origin and merge it into main so the reports are visible on
   the default branch (main currently only has the older history).
 - Final read-through of the Lab1/Lab6 docx by the student before submission.
+- Open each report once in Word and press F9 (Update Table) if the page
+  numbers in the TOC are not refreshed automatically on your Word version.
 - Lab5_6/ folder duplicates Lab5+Lab6 material (find.c, mystat.c, report.md);
   it can be removed once the student confirms nothing extra is needed there.
 
