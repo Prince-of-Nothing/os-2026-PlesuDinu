@@ -1,0 +1,2 @@
+$ du -sh ~/os-lab1
+512	/home/vboxuser/os-lab1

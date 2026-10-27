@@ -1,0 +1,6 @@
+$ mkdir -p ~/os-lab1 && cd ~/os-lab1
+$ whoami
+$ uname -a
+vboxuser
+Linux Shameless 7.0.0-38-generic #38-Ubuntu SMP PREEMPT_DYNAMIC Fri Sep  4 09:10:14 UTC 2026 x86_64 GNU/Linux
+ 07:19:28 up 5 min,  1 user,  load average: 7.80, 6.73, 3.11

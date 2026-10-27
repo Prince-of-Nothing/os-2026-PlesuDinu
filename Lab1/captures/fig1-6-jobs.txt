@@ -1,0 +1,9 @@
+$ sleep 300 &
+$ jobs
+$ ps -ef | grep sleep
+$ kill 13451
+[1] 13451
+[1]+  Running                    sleep 300 &
+vboxuser   13451    8228 99 11:27 pts/0    00:00:00 sleep 300
+vboxuser   13453    8228 33 11:27 pts/0    00:00:00 grep sleep
+[1]+  Terminated                 sleep 300

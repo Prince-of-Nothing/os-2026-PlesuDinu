@@ -1,0 +1,17 @@
+$ free -h
+$ cat /proc/meminfo | head -6
+sleep 300 & PID=$!
+grep VmRSS /proc/$PID/status # real RAM used by this process
+kill $PID
+               total        used        free      shared  buff/cache   available
+Mem:           7.2Gi       1.6Gi       4.0Gi        41Mi       1.9Gi       5.6Gi
+Swap:             0B          0B          0B
+MemTotal:        7598072 kB
+MemFree:         4184516 kB
+MemAvailable:    5877904 kB
+Buffers:           51672 kB
+Cached:          1872036 kB
+SwapCached:            0 kB
+[1] 13599
+VmRSS:	     912 kB
+[1]+  Terminated                 sleep 300
