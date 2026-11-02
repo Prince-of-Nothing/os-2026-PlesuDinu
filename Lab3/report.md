@@ -39,6 +39,8 @@ Tab completes a unique path prefix, such as `/et` to `/etc`. If several entries 
 
 ![Figure 1.1 – Part 1: command lookup, PATH, missing-command status, and the `ls` time option](captures/png/lab3-part1-grouped-real.png)
 
+This figure records the shell lookup workflow: the user typed a unique path prefix, used Tab completion, checked the command search path, and confirmed that a missing command returns status 127. It also shows the time-sorted `ls -t` view, which demonstrates that shell behavior and program discovery are controlled by Bash and the filesystem lookup path, not by the program itself.
+
 ## Part 2: What the Shell Does to Your Line
 
 Run the commands in the assignment after creating the six files. The table records the expected output on Bash; the weekday and account name depend on the computer. Add your own prediction before running each command and note any differences.
@@ -60,6 +62,8 @@ The shell, not `echo`, expands `*.c`. `ls alfa beta.txt` can be fixed with `ls '
 
 ![Figure 2.1 – Part 2: file list, globbing, quoting, spaces, and expansions](captures/png/lab3-part2-grouped-real.png)
 
+This output captures the shell expansion experiments: the files were created, wildcard patterns were tested, quotes were compared, and the interaction between spaces and expansions was observed. The sequence shows that Bash expands filenames, variables, braces, and arithmetic before the command runs, while quoting prevents that expansion and preserves the exact argument text.
+
 ## Part 3: Redirection, Chaining, and Jobs
 
 `ls /etc /nope > out.txt 2> err.txt` writes the `/etc` listing to `out.txt` and the missing-path diagnostic to `err.txt`. In `ls /etc /nope > all.txt 2>&1`, standard output is first redirected to `all.txt`, then standard error is made a copy of that destination, so both streams go into the file. In `ls /etc /nope 2>&1 > all.txt`, standard error first copies the original standard output (the terminal), then only standard output moves to the file; the error remains on the terminal.
@@ -67,6 +71,8 @@ The shell, not `echo`, expands `*.c`. `ls alfa beta.txt` can be fixed with `ls '
 `wc -l < access.log` reads standard input, so it prints only the count. `wc -l access.log` opens a named file and includes its name in the output. `;` runs the next command regardless of the previous status; `&&` runs it only after success; `||` runs it only after failure. A trailing `&` starts a background job; `jobs` lists it, and `kill %1` requests its termination.
 
 ![Figure 3.1 – Part 3: redirection, command chaining, and background jobs](captures/png/lab3-part3-grouped-real.png)
+
+This figure presents the redirection and job-control checks: output and error streams were redirected into separate files, then combined into one file to show how duplicate descriptors change the final destination. The command chain also demonstrates the differences between `;`, `&&`, `||`, and background execution, so the task shows both shell syntax and the resulting process behavior.
 
 ## Part 4: One-Liners
 
@@ -87,6 +93,8 @@ The bonus command selects failed requests whose minute ends in zero; the generat
 
 ![Figure 4.1 – Part 4: `oneliners.sh` results for Q1–Q8](captures/png/lab3-part4-grouped-real.png)
 
+This screenshot shows the actual output of the one-liner solution set against the generated 500-row access log. The task answers the eight required questions about failures, pages, user counts, request patterns, and shell behavior, so the image is a direct validation of the filtering logic that was implemented in the script.
+
 ## Part 5: First Script
 
 [`report.sh`](report.sh) checks that its input file exists, reports total and failed requests, then loops through `user0` to `user6` and prints each user's failed-request count. The shebang `#!/usr/bin/env bash` asks the environment to locate Bash to interpret the script. Without execute permission, `./report.sh` fails with a permission error; after `chmod +x report.sh` it can be run directly. `./` names a path in the current directory because that directory is normally not included in `PATH`. Writing the diagnostic to file descriptor 2 keeps it on standard error; `exit 1` communicates failure to the calling shell.
@@ -94,6 +102,8 @@ The bonus command selects failed requests whose minute ends in zero; the generat
 For a missing file, expected behavior is `no such file: nope.log` on standard error followed by exit status 1. The cron bonus was not run.
 
 ![Figure 5.1 – Part 5: `report.sh` source, normal output, and missing-file handling](captures/png/lab3-part5-grouped-real.png)
+
+This figure records the script-writing task: the source was inspected, the script was executed with a valid log file, and then it was rerun with a missing file to verify the error path. The visible output confirms the expected behavior of a shell script: valid input produces a summary, while a missing file prints an error to standard error and exits with a non-zero status.
 
 ## Conclusion
 

@@ -23,9 +23,13 @@ $ sleep
 usage: sleep <ticks>
 ```
 
-![Figure 1.1 – `pause` declaration in `user.h` and the updated `sleep.c`](resources/terminal-captures/real/lab4-fig1-sleep-source-real.png)
+![Figure 1.1 – `pause` declaration in `user.h` and the updated `sleep.c`](captures/png/lab4-fig1-sleep-source-real.png)
 
-![Figure 1.2 – `sleep` run with and without an argument in xv6](resources/terminal-captures/real/lab4-fig2-sleep-run-real.png)
+This figure shows the compatibility fix in `user.h` and the implementation change in `sleep.c`: the program was rewritten to use the current xv6 API and to handle the invalid usage case cleanly. The result is a small, correct system call wrapper that still matches the expected shell behavior.
+
+![Figure 1.2 – `sleep` run with and without an argument in xv6](captures/png/lab4-fig2-sleep-run-real.png)
+
+This run demonstrates the actual behavior of the patched program in xv6: it sleeps when given a valid number of ticks and prints a usage message when it is called without arguments. The comparison makes the fix visible in practice, not only in the source code.
 
 ## Part 2: Bash versus the xv6 Shell
 
@@ -46,9 +50,13 @@ The table summarizes expected behavior. Capture local listing output in both env
 
 Both shells support execution, basic redirection, pipes, command sequences, and background commands. Bash additionally provides variable and pathname expansion, full quote handling, history, completion, and job control. xv6's special `cd` handling is in the shell's input loop, so it works when typed as its own command. After changing into `d`, `/ls ..` works because the executable is addressed from the filesystem root. The feature I would miss most is history with Tab completion, because retyping long commands and absolute paths such as `/ls` is slow; the easiest to add is wildcard expansion, because the shell could reuse the directory-reading code from `ls` and substitute matching names before calling `exec`.
 
-![Figure 2.1 – The command comparison in Bash](resources/terminal-captures/real/lab4-fig3-bash-real.png)
+![Figure 2.1 – The command comparison in Bash](captures/png/lab4-fig3-bash-real.png)
 
-![Figure 2.2 – The same commands in xv6, the `ls` failure after `cd d`, and the `/ls` alternative](resources/terminal-captures/real/lab4-fig4-xv6-real.png)
+This Bash capture shows the expected Linux behavior for redirection, piping, background jobs, globs, and variable expansion. It is the control case against which the xv6 shell output is compared, making the difference between shell features and kernel behavior explicit.
+
+![Figure 2.2 – The same commands in xv6, the `ls` failure after `cd d`, and the `/ls` alternative](captures/png/lab4-fig4-xv6-real.png)
+
+This x86 capture demonstrates the same tasks in the tiny xv6 shell: redirection and pipes still work, but glob expansion and variable expansion do not. The `cd d` failure and `/ls` workaround are especially important because they show that the shell handles `cd` specially and that an absolute path can bypass the missing built-in behavior.
 
 ## Part 3: Who Expands `*`? The `argv` Program
 
@@ -77,11 +85,17 @@ argv[3] = [y"]
 
 The shell performs wildcard expansion and removes syntactic quotes before a program starts. The kernel supplies the argument vector but does not expand `*` or remove quotes. In `args one              two         three`, runs of unquoted whitespace are separators, so extra spaces do not become part of an argument. For `args 'single quoted'`, Bash passes `single quoted` as one argument with no quotes; xv6 treats quotes as ordinary text and splits at the space.
 
-![Figure 3.1 – `args.c` and its `UPROGS` line](resources/terminal-captures/real/lab4-fig5-args-source-real.png)
+![Figure 3.1 – `args.c` and its `UPROGS` line](captures/png/lab4-fig5-args-source-real.png)
 
-![Figure 3.2 – `args` output in xv6](resources/terminal-captures/real/lab4-fig6-args-xv6-real.png)
+This image captures the source-level part of the experiment: the program prints `argc` and each element of `argv`, and the Makefile registers it so it can be run inside xv6. It establishes the exact code that is being tested before the runtime output is observed.
 
-![Figure 3.3 – `args` output in Linux (Bash)](resources/terminal-captures/real/lab4-fig7-args-linux-real.png)
+![Figure 3.2 – `args` output in xv6](captures/png/lab4-fig6-args-xv6-real.png)
+
+This xv6 output is the crucial proof that the shell does not expand `*` or remove the quote characters before calling the program. The arguments are passed literally, so the shell and the kernel are separated by a clear boundary: quoting and wildcard expansion are not kernel duties.
+
+![Figure 3.3 – `args` output in Linux (Bash)](captures/png/lab4-fig7-args-linux-real.png)
+
+This Bash output shows the same program under the host shell, where filename expansion and quote handling happen before `argv` is created. The comparison makes the difference between a full user shell and the much smaller xv6 shell easy to see.
 
 ## Part 4: Read the Shell
 
@@ -91,7 +105,9 @@ The five command kinds are `EXEC` (ordinary command), `REDIR` (`<`, `>`, `>>`), 
 
 There is no code in `sh.c` implementing pathname (`*`) or variable (`$HOME`) expansion. That explains why xv6 passes those characters to programs literally, unlike Bash.
 
-![Figure 4.1 – Command-kind definitions, `runcmd()` cases, `cd` handling, and the absence of expansion code in `sh.c`](resources/terminal-captures/real/lab4-fig8-sh-source-real.png)
+![Figure 4.1 – Command-kind definitions, `runcmd()` cases, `cd` handling, and the absence of expansion code in `sh.c`](captures/png/lab4-fig8-sh-source-real.png)
+
+This final source view connects the shell design to the observed runtime behavior: the command kinds are parsed into structures, `runcmd()` dispatches them, and `cd` is handled specially in the shell. The absence of glob and variable expansion code in `sh.c` explains exactly why Bash and xv6 behave differently in the preceding tasks.
 
 ## Conclusion
 

@@ -13,7 +13,9 @@ Repeat the Lab 7 process and pipe experiments inside xv6, using its smaller syst
 
 The text `hello from the child` is printed by the `echo` program after `exec()` replaces the child. In the missing-program experiment, xv6's sample child explicitly calls `exit(1)` after failed `exec`, while the Linux program calls `exit(127)`; the parent reports the child's chosen status.
 
-![Figure 1.1 – xv6: run forks a child that execs echo and the parent reports its status](resources/terminal-captures/real/lab8-fig1-run-real.png)
+![Figure 1.1 – xv6: run forks a child that execs echo and the parent reports its status](captures/png/lab8-fig1-run-real.png)
+
+This figure shows the xv6 version of the process-experiment task: the parent creates a child, the child replaces itself with `echo`, and the parent waits for the child to finish. The output confirms that the same lifecycle works inside xv6 even though the system-call interface is much smaller than Linux glibc.
 
 ## Part 2: `pingpong`
 
@@ -32,7 +34,9 @@ $ pingpong
 9: received pong
 ```
 
-![Figure 2.1 – xv6: pingpong over two pipes (ping is received before pong)](resources/terminal-captures/real/lab8-fig2-pingpong-real.png)
+![Figure 2.1 – xv6: pingpong over two pipes (ping is received before pong)](captures/png/lab8-fig2-pingpong-real.png)
+
+This figure captures the request/response exchange: one pipe carries the parent-to-child message and the second carries the child-to-parent reply. The order of the printed messages shows that the child sends `ping` first and then the parent replies with `pong`, which is exactly what a two-pipe handshake is designed to demonstrate.
 
 PIDs vary between runs. The Makefile entry is included in [UPROGS.txt](UPROGS.txt).
 

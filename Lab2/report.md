@@ -23,13 +23,13 @@ The xv6 tree is in `~/xv6-riscv`. I built and launched it with `make qemu`; QEMU
 
 `kernel/` contains privileged operating-system implementation code. `user/` contains ordinary programs that request kernel services through system calls.
 
-![Figure 3.1 – Locating sys_read and sys_write, the start of user/cat.c, and fileread in the kernel](resources/terminal-captures/real/lab2-fig1-source-real.png)
+![Figure 3.1 – Locating sys_read and sys_write, the start of user/cat.c, and fileread in the kernel](captures/png/lab2-fig1-source-real.png)
 
 ## Part 4: First xv6 program
 
 This lab uses the standard xv6 API, where `user/user.h` declares `sleep(int)`. The working program is `sleep.c`, and the Makefile contains the required `$U/_sleep\` entry. I built and booted xv6 with `make qemu CPUS=1`, then tested the shell tools and `sleep`:
 
-![Figure 4.1 – xv6 session: wc, a pipe, and sleep with and without an argument](resources/terminal-captures/real/lab2-fig2-xv6-real.png)
+![Figure 4.1 – xv6 session: wc, a pipe, and sleep with and without an argument](captures/png/lab2-fig2-xv6-real.png)
 
 The valid call waited and returned to the shell; the invalid call printed the expected usage message. Lab 4 separately adapts this program if a newer xv6 checkout exposes the renamed `pause(int)` call.
 

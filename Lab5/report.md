@@ -14,7 +14,9 @@ Use `ls -ld /etc /etc/passwd /bin /dev/null /tmp`, `file`, `ls -l /dev`, and `du
 
 On this host, `/bin` is a symbolic link to `/usr/bin`. The `ls -ld` output shows `/etc` and `/tmp` are directories, `/etc/passwd` is a regular file, and `/dev/null` is a character device. `/dev/null` is the character-device example; `/dev/nvme0n1` is the block-device example. `du -sh` reported 45 MiB for `/var/log` and 17 GiB for `/usr`, so `/usr` is larger by roughly 16.96 GiB.
 
-![Figure 5.1 – File types, devices, and directory sizes](resources/terminal-captures/real/lab5-fig1-types-real.png)
+![Figure 5.1 – File types, devices, and directory sizes](captures/png/lab5-fig1-types-real.png)
+
+This figure shows the first filesystem inspection step: the machine was queried with `ls -ld`, `file`, and `du` to classify directories, regular files, symlinks, and device files. The observed output confirms that object type is visible from metadata and that the same root filesystem contains both ordinary files and kernel-backed device nodes.
 
 ## Part 2: Inodes and links
 
@@ -26,7 +28,9 @@ A new directory normally has two links: its own name in its parent and `.` insid
 
 `ls -l` reports logical file length, while `du` reports allocated storage blocks. A tiny file uses at least one filesystem block (commonly 4 KiB); a sparse 1 GiB file created by `truncate` can have almost no blocks allocated until data is written.
 
-![Figure 5.2 – Inode, hard-link, symbolic-link, directory-link, and sparse-file observations](resources/terminal-captures/real/lab5-fig2-links-real.png)
+![Figure 5.2 – Inode, hard-link, symbolic-link, directory-link, and sparse-file observations](captures/png/lab5-fig2-links-real.png)
+
+This output captures the inode-link experiments: the same file was referenced through multiple names, a symlink was created to another path, and a sparse file was created with a large logical size but almost no allocated blocks. The task makes the difference between a pathname, an inode, and stored data concrete.
 
 ## Part 3: Permissions
 
@@ -43,7 +47,9 @@ Record the actual `umask` value. New regular-file permissions are based on `666`
 
 The observed umask was `0022`. It produced `-rw-r--r--` for `new.txt` and `drwxr-xr-x` for `newdir`. For a directory with `u=r,go=`, `ls box` could list `f`, but opening `box/f` failed because there was no execute/search permission on `box`. With `u=x,go=`, listing names failed but reading the known path `box/f` succeeded. `/usr/bin/passwd` has setuid (`s`) and `/tmp` has the sticky (`t`) bit. Reading `/etc/shadow` was denied for the regular user.
 
-![Figure 5.3 – File and directory permission tests, umask, and special bits](resources/terminal-captures/real/lab5-fig3-permissions-real.png)
+![Figure 5.3 – File and directory permission tests, umask, and special bits](captures/png/lab5-fig3-permissions-real.png)
+
+This figure records the permission checks and security bits for the filesystem: the default umask was observed, directory traversal rules were tested, and the setuid/sticky bits were identified on the actual system files. It demonstrates that access depends on permission bits, owner classes, and the directory traversal rule, not just on whether a file exists.
 
 ## Part 4: Disks and kernel data as files
 
@@ -51,9 +57,13 @@ The observed umask was `0022`. It produced `-rw-r--r--` for `new.txt` and `drwxr
 
 The device tree relevant to `/` is `nvme0n1` → `nvme0n1p4` → `/` (Btrfs); this is a partition of a larger 1.8 TiB NVMe drive, not the whole drive. The complete `lsblk` capture is included below.
 
-![Figure 5.4 – Disk layout and root filesystem usage](resources/terminal-captures/real/lab5-fig4-disks-real.png)
+![Figure 5.4 – Disk layout and root filesystem usage](captures/png/lab5-fig4-disks-real.png)
 
-![Figure 5.5 – CPU, memory, and `/proc` observations](resources/terminal-captures/real/lab5-fig5-proc-real.png)
+This figure shows the system storage view: the root filesystem, its mount point, and the available capacity were inspected with `lsblk` and `df`. The task confirms that storage is visible through a hierarchy of device and mount metadata, rather than as a single monolithic disk image.
+
+![Figure 5.5 – CPU, memory, and `/proc` observations](captures/png/lab5-fig5-proc-real.png)
+
+This final figure captures the kernel-backed view of the current system: `/proc/cpuinfo`, `/proc/meminfo`, and `/proc/self/status` expose live process and machine data as ordinary files. Together they show that the kernel provides a readable synthetic filesystem for runtime process and hardware information.
 
 ## Conclusion
 

@@ -20,7 +20,9 @@ gcc -Wall -Wextra -o run run.c
 
 The PID values and directory listing vary. When testing a missing command, replace the `execlp("ls", ...)` line with `execlp("nosuchprog", "nosuchprog", (char *)NULL)`.
 
-![Figure 1.1 – `run`: parent PID, child PID and parent PID, `ls -l` output, and the exit status](resources/terminal-captures/real/lab7-fig1-run-real.png)
+![Figure 1.1 – `run`: parent PID, child PID and parent PID, `ls -l` output, and the exit status](captures/png/lab7-fig1-run-real.png)
+
+This screenshot captures the process-creation task: the parent prints its PID, forks, and the child executes `ls -l` in place of itself. The displayed PID values and exit status show the relationship between parent and child and confirm that the child can run a different program while the parent continues to wait for completion.
 
 ## Part 2: A zombie, on purpose
 
@@ -33,13 +35,17 @@ sleep 2
 ps -o pid,ppid,stat,cmd
 ```
 
-![Figure 2.1 – `zombie`: the child is `Z` (defunct) while the parent sleeps](resources/terminal-captures/real/lab7-fig2-zombie-real.png)
+![Figure 2.1 – `zombie`: the child is `Z` (defunct) while the parent sleeps](captures/png/lab7-fig2-zombie-real.png)
+
+This figure shows the intentional zombie state: the child exits, but the parent delays `waitpid()`, so the process remains in `Z` state until reaped. The output makes visible the important OS rule that a terminated child can still occupy a process table entry until the parent calls `waitpid()`.
 
 ## Part 3: Redirection
 
 [`redirect.c`](redirect.c) closes descriptor 1 in the child before opening `out.txt`. `open()` returns descriptor 1 because it allocates the lowest available descriptor. `ls` still writes to standard output, but that descriptor now refers to `out.txt`, so the listing is not printed on the terminal. To redirect standard error, close descriptor 2 before `open()`.
 
-![Figure 3.1 – `redirect`: `open` returns descriptor 1 and the listing goes to `out.txt`](resources/terminal-captures/real/lab7-fig3-redirect-real.png)
+![Figure 3.1 – `redirect`: `open` returns descriptor 1 and the listing goes to `out.txt`](captures/png/lab7-fig3-redirect-real.png)
+
+This result is the redirection experiment in action: the child closes standard output, opens `out.txt`, and receives descriptor 1 because the lowest available file descriptor is reused. The listing therefore goes to the file, not to the terminal, which proves that file descriptors control where process output is sent.
 
 ## Part 4: A pipe
 
@@ -58,7 +64,9 @@ gcc -Wall -Wextra -o pipeline3 pipeline3.c
 ls /usr/bin | grep x | wc -l
 ```
 
-![Figure 4.1 – `pipeline` and `pipeline3` match the shell pipelines (227 and 350)](resources/terminal-captures/real/lab7-fig4-pipeline-real.png)
+![Figure 4.1 – `pipeline` and `pipeline3` match the shell pipelines (227 and 350)](captures/png/lab7-fig4-pipeline-real.png)
+
+This pipeline capture validates both the single-stage and the three-stage pipe examples: the output counts match the corresponding shell commands when run on the same system. The exercise demonstrates that pipes connect the standard output of one process to the standard input of another, and that proper shutdown of unused ends is essential for correct EOF behavior.
 
 ## Conclusion
 
