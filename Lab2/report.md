@@ -27,11 +27,11 @@ The xv6 tree is in `~/xv6-riscv`. I built and launched it with `make qemu`; QEMU
 
 ## Part 4: First xv6 program
 
-The current xv6 checkout declares `pause(int)` instead of `sleep(int)`. The working program is `sleep.c`, and the Makefile entry (`$U/_sleep\`) is recorded in `UPROGS.txt`. I built and booted xv6 with `make qemu CPUS=1`, then tested the shell tools and `sleep`:
+This lab uses the standard xv6 API, where `user/user.h` declares `sleep(int)`. The working program is `sleep.c`, and the Makefile contains the required `$U/_sleep\` entry. I built and booted xv6 with `make qemu CPUS=1`, then tested the shell tools and `sleep`:
 
 ![Figure 4.1 – xv6 session: wc, a pipe, and sleep with and without an argument](resources/terminal-captures/real/lab2-fig2-xv6-real.png)
 
-The valid call waited and returned to the shell; the invalid call printed the expected usage message.
+The valid call waited and returned to the shell; the invalid call printed the expected usage message. Lab 4 separately adapts this program if a newer xv6 checkout exposes the renamed `pause(int)` call.
 
 ## Conclusion
 
