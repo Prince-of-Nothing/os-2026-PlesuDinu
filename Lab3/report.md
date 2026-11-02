@@ -9,6 +9,14 @@
 
 Practice Bash command lookup, shell expansion, quoting, redirection, pipelines, process control, and small scripts. Use filters to answer questions about a generated access log.
 
+## Included Artifacts
+
+This lab folder contains the full runnable material for the assignment:
+
+- [`oneliners.sh`](oneliners.sh) — one-liner solutions for Q1–Q8 and the bonus query.
+- [`report.sh`](report.sh) — summary script for total and per-user failure counts.
+- `captures/png/` — local screenshots for each part of the report, stored next to the scripts so the lab remains self-contained.
+
 ## Initial Setup
 
 The laboratory uses an artificial web access log with 500 entries, generated in `~/os-lab3` and checked before running the one-liners.
@@ -29,7 +37,7 @@ Tab completes a unique path prefix, such as `/et` to `/etc`. If several entries 
 
 **Observed on this host:** `cd` and `echo` are Bash builtins; `ls` resolves to `/usr/bin/ls`. The inherited `PATH` contains 16 directory entries (some repeat). A missing command returned 127. `ls -t` sorts by modification time, newest first.
 
-![Figure 1.1 – Part 1: command lookup, PATH, missing-command status, and the `ls` time option](resources/terminal-captures/real/lab3-part1-grouped-real.png)
+![Figure 1.1 – Part 1: command lookup, PATH, missing-command status, and the `ls` time option](captures/png/lab3-part1-grouped-real.png)
 
 ## Part 2: What the Shell Does to Your Line
 
@@ -50,7 +58,7 @@ Run the commands in the assignment after creating the six files. The table recor
 
 The shell, not `echo`, expands `*.c`. `ls alfa beta.txt` can be fixed with `ls 'alfa beta.txt'` or `ls alfa\ beta.txt`. Single quotes preserve enclosed characters literally. Double quotes preserve word boundaries but still allow parameter, command, and arithmetic expansion. `ls` may quote a filename in its display to make embedded whitespace unambiguous; those display quotes are not part of the filename.
 
-![Figure 2.1 – Part 2: file list, globbing, quoting, spaces, and expansions](resources/terminal-captures/real/lab3-part2-grouped-real.png)
+![Figure 2.1 – Part 2: file list, globbing, quoting, spaces, and expansions](captures/png/lab3-part2-grouped-real.png)
 
 ## Part 3: Redirection, Chaining, and Jobs
 
@@ -58,7 +66,7 @@ The shell, not `echo`, expands `*.c`. `ls alfa beta.txt` can be fixed with `ls '
 
 `wc -l < access.log` reads standard input, so it prints only the count. `wc -l access.log` opens a named file and includes its name in the output. `;` runs the next command regardless of the previous status; `&&` runs it only after success; `||` runs it only after failure. A trailing `&` starts a background job; `jobs` lists it, and `kill %1` requests its termination.
 
-![Figure 3.1 – Part 3: redirection, command chaining, and background jobs](resources/terminal-captures/real/lab3-part3-grouped-real.png)
+![Figure 3.1 – Part 3: redirection, command chaining, and background jobs](captures/png/lab3-part3-grouped-real.png)
 
 ## Part 4: One-Liners
 
@@ -77,7 +85,7 @@ The runnable answers are in [`oneliners.sh`](oneliners.sh). For the assignment's
 
 The bonus command selects failed requests whose minute ends in zero; the generated data contains 50 such requests.
 
-![Figure 4.1 – Part 4: `oneliners.sh` results for Q1–Q8](resources/terminal-captures/real/lab3-part4-grouped-real.png)
+![Figure 4.1 – Part 4: `oneliners.sh` results for Q1–Q8](captures/png/lab3-part4-grouped-real.png)
 
 ## Part 5: First Script
 
@@ -85,7 +93,7 @@ The bonus command selects failed requests whose minute ends in zero; the generat
 
 For a missing file, expected behavior is `no such file: nope.log` on standard error followed by exit status 1. The cron bonus was not run.
 
-![Figure 5.1 – Part 5: `report.sh` source, normal output, and missing-file handling](resources/terminal-captures/real/lab3-part5-grouped-real.png)
+![Figure 5.1 – Part 5: `report.sh` source, normal output, and missing-file handling](captures/png/lab3-part5-grouped-real.png)
 
 ## Conclusion
 

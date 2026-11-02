@@ -16,10 +16,9 @@
 # Tooling / scratch inside the labs — not required by the assignments:
 #   captures/  = raw terminal logs & figure screenshots used to build reports
 #   build_*.py = report compiler scripts
-#   notes.md   = working notes
+#   notes.md   = working notes for labs that do not use it as the deliverable
 Lab*/captures/
 Lab*/build_*.py
-Lab*/notes.md
 
 # Junk that should never be committed anywhere:
 **/*~
